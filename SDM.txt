@@ -1,0 +1,33 @@
+package com.test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Practice {
+
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver dr = new ChromeDriver();
+		dr.get("https://practicetestautomation.com/practice-test-login/");
+		dr.manage().window().maximize();
+		
+		WebElement w = dr.findElement(By.name("username"));
+		Thread.sleep(1000);
+		w.click();
+		w.sendKeys("Abhilasha");
+		WebElement w2 = dr.findElement(By.id("submit"));
+		w2.click();
+		Thread.sleep(1000);
+		WebElement message = dr.findElement(By.id("error"));	
+		System.out.println(message.getText());
+		w.sendKeys("student");	
+		WebElement w3 = dr.findElement(By.name("password"));
+		WebElement w4 = dr.findElement(By.id("submit"));
+		w4.click();
+		System.out.println(message.getText());
+		
+
+	}
+
+}

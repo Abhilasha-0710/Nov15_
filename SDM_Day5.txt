@@ -1,0 +1,84 @@
+package com.testng;
+
+import org.testng.annotations.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.DataProvider;
+
+public class Data_Provider_Class {
+  @Test(dataProvider = "dp")
+  public void f(String n, String s) throws InterruptedException {
+	  WebDriver dr = new ChromeDriver();
+	  dr.manage().window().maximize();
+	  dr.get("https://practicetestautomation.com/practice-test-login/");
+	  
+	  WebElement usr = dr.findElement(By.id("username"));
+	  usr.click();
+	  usr.sendKeys(n);
+	  
+	  Thread.sleep(1000);
+	  
+	  WebElement pw = dr.findElement(By.id("password"));
+	  pw.click();
+	  pw.sendKeys(s);
+	  
+	  Thread.sleep(1000);
+	  
+	  WebElement login = dr.findElement(By.id("submit"));
+	  login.click();
+
+	  Thread.sleep(1000);
+  }
+
+  @DataProvider
+  public Object[][] dp() {
+    return new Object[][] {
+      new Object[] { "abhilasha", "abhilasha123" },
+      new Object[] { "debojit", "debojit123" },
+      new Object[] { "student", "Password123" },
+    };
+  }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+package com.testng;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class DemoProperty {
+  @Test
+  public void f() throws IOException {
+	  WebDriver dr = new ChromeDriver();
+	  dr.manage().window().maximize();
+	  Properties p = new Properties();
+	  FileReader fr = new FileReader("D:\\Abhilasha_SDM\\TestNG\\TestNG\\src\\input.property");
+	  p.load(fr); 
+	  dr.get(p.getProperty("url"));
+	  
+	  WebElement usr = dr.findElement(By.id("username"));
+	  usr.click();
+	  usr.sendKeys("student");
+	  
+	  WebElement pw = dr.findElement(By.id("password"));
+	  pw.click();
+	  pw.sendKeys("Password123");
+	  
+	  WebElement login = dr.findElement(By.id("submit"));
+	  login.click();
+  }
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,45 @@
+package com.testng;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+
+public class Practice {
+	
+	 WebDriver dr = new ChromeDriver();
+	 
+  @Test
+  @Parameters({"username", "password"})
+  public void f(String username, String password) throws InterruptedException {
+	  Thread.sleep(1000);
+	  WebElement usr = dr.findElement(By.name("username"));
+	  usr.click();
+	  usr.sendKeys(username);
+	  
+	  WebElement pw = dr.findElement(By.name("password"));
+	  pw.click();
+	  pw.sendKeys(password);
+	  
+	  Thread.sleep(1000);
+	  WebElement login = dr.findElement(By.id("submit-login"));
+	  login.click();
+	  
+  }
+  @BeforeTest
+  public void beforeTest() {
+	 	 
+		  dr.manage().window().maximize();
+		  dr.get("https://practice.expandtesting.com/login");
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  
+  }
+
+}
